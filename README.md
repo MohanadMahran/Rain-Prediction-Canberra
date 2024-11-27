@@ -72,6 +72,43 @@ In this phase, we systematically cleaned and prepared the weather dataset to ens
    
 This preprocessing phase addresses potential sources of bias and inconsistency in the dataset, ensuring it adheres to best practices for data analysis. By reducing dimensionality, imputing missing values, and standardizing formats, we minimize noise and enhance the dataset’s overall quality. These steps are crucial for extracting meaningful insights and building robust predictive models in subsequent project phases.
 
+### **Phase 3: Feature Analysis and Visualization**
+
+In this phase, we focused on analyzing the features in the dataset to assess their relevance and importance in predicting the target variable, a binary classification (0 or 1). The steps outlined below describe the methodologies used to evaluate feature importance, identify key variables, and visualize the results:
+
+1. **Feature Correlation with Target**:  
+   The first step involved analyzing the correlation between each feature and the target variable. Using the `pandas.corrwith()` function, we computed correlation coefficients between each feature and the target to identify which features exhibited strong linear relationships with the target.  
+   - The absolute values of these correlations were used to prioritize features that had the most influence on the target.
+
+2. **Visualization of Correlation**:  
+   The correlation results were visualized using a horizontal bar plot to make the relationships clearer. Features with the strongest correlation to the target were highlighted, providing an intuitive understanding of which variables may have the most predictive power.
+
+3. **Mutual Information Calculation**:  
+   To account for non-linear relationships, we calculated the mutual information between each feature and the target using `mutual_info_classif` from `sklearn`. Mutual information quantifies the amount of shared information between a feature and the target, identifying features that provide the most value for predicting the target.  
+   - The mutual information scores were sorted in descending order and visualized in a bar plot for easy comparison.
+
+4. **Feature Importance Using Random Forest**:  
+   We trained a Random Forest classifier to determine the importance of each feature in predicting the target. The Random Forest algorithm uses decision trees to evaluate how much each feature reduces classification error (impurity). This helped identify which features were most influential in the classification task.  
+   - A bar plot was created to display the feature importance scores, sorted by importance.
+
+5. **Comparison of Feature Selection Methods**:  
+   The results from the correlation analysis, mutual information, and Random Forest feature importance were combined into one dataframe for direct comparison. This approach allowed us to cross-check which features were consistently important across multiple methods, ensuring the robustness of our feature selection process.
+
+6. **Visualization of Feature Selection Methods**:  
+   A scatter plot was generated to compare the mutual information scores with the Random Forest feature importance scores. This visualization helped identify features that were important according to both metrics and provided insight into which features should be prioritized in future modeling.
+
+7. **Conclusion and Feature Prioritization**:  
+   After analyzing the results from the correlation analysis, mutual information, and Random Forest feature importance, it became evident that some features exhibited low importance across different methods. Specifically, the following six features showed low patterns of importance across all metrics:  
+   - `'Max wind gust_Spd'`
+   - `'9 am_Spd'`
+   - `'3 pm_Dir'`
+   - `'3 pm_Spd'`
+   - `'9 am_Dir'`
+   - `'Max wind gust_Dir'`
+
+   These features consistently appeared to have minimal influence on the target variable. While removing them may simplify the model, it is essential to investigate further whether they affect the model’s performance. The simplest approach would be to drop these features; however, additional analysis is required to confirm whether these features truly have no impact on the model's predictive power. This investigation will be important before making the final decision on feature removal.
+   
+This phase ensured that we thoroughly analyzed the features in the dataset and their relationship with the target variable. By applying multiple methods such as correlation analysis, mutual information, and Random Forest feature importance, and visualizing the results, we gained valuable insights into which features had the most predictive power. We identified six features with consistently low importance across all metrics: `'Max wind gust_Spd'`, `'9 am_Spd'`, `'3 pm_Dir'`, `'3 pm_Spd'`, `'9 am_Dir'`, and `'Max wind gust_Dir'`. While these features may be candidates for removal, further investigation is needed to determine whether they have any significant impact on the model’s performance. These steps provided a solid foundation for the next phase, where we will refine the feature selection and proceed with model building.
 ---
 ### Column Definitions
 To facilitate understanding, here are the meanings of the column headings used in the dataset:
@@ -97,6 +134,6 @@ To facilitate understanding, here are the meanings of the column headings used i
 | 3 pm MSLP         | Atmospheric pressure reduced to mean sea level at 3 pm               | hectopascals              |
 
 ---
-Stay Tuned 🚀
-We’re just getting started! The next phase will dive deeper into advanced analytical techniques and modeling. Stay tuned for more updates as the project evolves. Your feedback and contributions are always welcome! 🌟
+Stay Tuned 🚀  
+We’re just getting started! The next phase will focus on refining feature selection, followed by building and evaluating predictive models using the insights we’ve gained. Stay tuned for more updates as we progress. Your feedback and contributions are always welcome as we continue to enhance the model's accuracy and performance! 🌟
 ---
