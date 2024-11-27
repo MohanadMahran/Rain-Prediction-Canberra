@@ -107,8 +107,9 @@ In this phase, we focused on analyzing the features in the dataset to assess the
    - `'Max wind gust_Dir'`
 
    These features consistently appeared to have minimal influence on the target variable. While removing them may simplify the model, it is essential to investigate further whether they affect the model’s performance. The simplest approach would be to drop these features; however, additional analysis is required to confirm whether these features truly have no impact on the model's predictive power. This investigation will be important before making the final decision on feature removal.
-   
+
 This phase ensured that we thoroughly analyzed the features in the dataset and their relationship with the target variable. By applying multiple methods such as correlation analysis, mutual information, and Random Forest feature importance, and visualizing the results, we gained valuable insights into which features had the most predictive power. We identified six features with consistently low importance across all metrics: `'Max wind gust_Spd'`, `'9 am_Spd'`, `'3 pm_Dir'`, `'3 pm_Spd'`, `'9 am_Dir'`, and `'Max wind gust_Dir'`. While these features may be candidates for removal, further investigation is needed to determine whether they have any significant impact on the model’s performance. These steps provided a solid foundation for the next phase, where we will refine the feature selection and proceed with model building.
+
 ---
 ### Column Definitions
 To facilitate understanding, here are the meanings of the column headings used in the dataset:
